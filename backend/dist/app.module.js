@@ -10,6 +10,11 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
+const usuarios_entity_1 = require("./usuarios/usuarios.entity");
+const clientes_entity_1 = require("./clientes/clientes.entity");
+const proyectos_entity_1 = require("./proyectos/proyectos.entity");
+const tareas_entity_1 = require("./tareas/tareas.entity");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,10 +34,11 @@ exports.AppModule = AppModule = __decorate([
                     username: configService.get('DB_USERNAME'),
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_DATABASE'),
-                    autoLoadEntities: true,
+                    entities: [usuarios_entity_1.Usuario, clientes_entity_1.Cliente, proyectos_entity_1.Proyecto, tareas_entity_1.Tarea],
                     synchronize: false,
                 }),
             }),
+            auth_module_1.AuthModule,
         ],
         controllers: [],
         providers: [],

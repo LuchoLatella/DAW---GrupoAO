@@ -9,17 +9,17 @@ export enum EstadoCliente {
 @Entity('clientes')
 export class Cliente {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ type: 'text', unique: true })
-  nombre: string;
+  nombre!: string;
 
   @Column({
     type: 'enum',
     enum: EstadoCliente,
   })
-  estado: EstadoCliente;
+  estado!: EstadoCliente;
 
   @OneToMany(() => Proyecto, (proyecto) => proyecto.cliente)
-  proyectos: Proyecto[];
+  proyectos!: Proyecto[];
 }

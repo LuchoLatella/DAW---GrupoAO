@@ -8,17 +8,17 @@ export enum EstadoUsuario {
 @Entity('usuarios')
 export class Usuario {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ type: 'text', unique: true })
-  nombre: string;
+  nombre!: string;
 
   @Column({ type: 'text' })
-  clave: string;
+  clave!: string;
 
   @Column({
     type: 'enum',
     enum: EstadoUsuario,
   })
-  estado: EstadoUsuario;
+  estado!: EstadoUsuario;
 }

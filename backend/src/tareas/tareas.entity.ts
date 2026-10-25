@@ -10,21 +10,21 @@ export enum EstadoTarea {
 @Entity('tareas')
 export class Tarea {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ type: 'text' })
-  descripcion: string;
+  descripcion!: string;
 
   @Column({
     type: 'enum',
     enum: EstadoTarea,
   })
-  estado: EstadoTarea;
+  estado!: EstadoTarea;
 
   @Column({ name: 'id_proyecto' })
-  id_proyecto: number;
+  id_proyecto!: number;
 
   @ManyToOne(() => Proyecto, (proyecto) => proyecto.tareas)
   @JoinColumn({ name: 'id_proyecto' })
-  proyecto: Proyecto;
+  proyecto!: Proyecto;
 }

@@ -11,24 +11,24 @@ export enum EstadoProyecto {
 @Entity('proyectos')
 export class Proyecto {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ type: 'text', unique: true })
-  nombre: string;
+  nombre!: string;
 
   @Column({
     type: 'enum',
     enum: EstadoProyecto,
   })
-  estado: EstadoProyecto;
+  estado!: EstadoProyecto;
 
   @Column({ name: 'id_cliente' })
-  id_cliente: number;
+  id_cliente!: number;
 
   @ManyToOne(() => Cliente, (cliente) => cliente.proyectos)
   @JoinColumn({ name: 'id_cliente' })
-  cliente: Cliente;
+  cliente!: Cliente;
 
   @OneToMany(() => Tarea, (tarea) => tarea.proyecto)
-  tareas: Tarea[];
+  tareas!: Tarea[];
 }

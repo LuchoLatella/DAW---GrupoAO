@@ -1,6 +1,11 @@
 ﻿import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Usuario } from './usuarios/usuarios.entity';
+import { Cliente } from './clientes/clientes.entity';
+import { Proyecto } from './proyectos/proyectos.entity';
+import { Tarea } from './tareas/tareas.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -17,10 +22,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        autoLoadEntities: true,
-        synchronize: false,
+        entities: [Usuario, Cliente, Proyecto, Tarea],
+        synchronize: false, // OBLIGATORIO: Mantiene la estructura del script oficial[cite: 3]
       }),
     }),
+    AuthModule,
   ],
   controllers: [],
   providers: [],
