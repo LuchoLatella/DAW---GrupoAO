@@ -7,7 +7,10 @@ export declare class AuthController {
         access_token: string;
         usuario: {
             id: number;
-            nombre: string;
+            documento: string;
+            nombres: string;
+            apellidos: string;
+            rol: import("../usuarios/usuarios.entity").RolUsuario;
         };
     }>;
 }

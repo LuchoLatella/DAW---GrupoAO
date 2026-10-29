@@ -1,4 +1,4 @@
 export declare class LoginDto {
-    nombre: string;
+    documento: string;
     clave: string;
 }

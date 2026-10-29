@@ -15,10 +15,10 @@ export class AuthService {
   ) {}
 
   async login(loginDto: LoginDto) {
-    const { nombre, clave } = loginDto;
+    const { documento, clave } = loginDto;
 
-    // 1. Buscar usuario por nombre
-    const usuario = await this.usuariosRepository.findOne({ where: { nombre } });
+    // 1. Buscar usuario por documento
+    const usuario = await this.usuariosRepository.findOne({ where: { documento } });
 
     if (!usuario) {
       throw new UnauthorizedException('Credenciales inválidas');
@@ -29,19 +29,38 @@ export class AuthService {
       throw new UnauthorizedException('El usuario se encuentra dado de baja');
     }
 
-    // 3. Validar contraseña con bcrypt (compatible con pgcrypto)[cite: 3]
-    const esClaveValida = await bcrypt.compare(clave, usuario.clave);
+    // 3. Validar contraseña con bcrypt o fallback de texto plano si no se ha hasheado en DB
+    let esClaveValida = false;
+
+    if (usuario.clave === clave) {
+      esClaveValida = true;
+    } else {
+      try {
+        esClaveValida = await bcrypt.compare(clave, usuario.clave);
+      } catch (error) {
+        esClaveValida = false;
+      }
+    }
+
     if (!esClaveValida) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
 
-    // 4. Generar token JWT
-    const payload = { sub: usuario.id, nombre: usuario.nombre };
+    // 4. Generar token JWT con rol
+    const payload = { 
+      sub: usuario.id, 
+      documento: usuario.documento, 
+      rol: usuario.rol 
+    };
+
     return {
       access_token: this.jwtService.sign(payload),
       usuario: {
         id: usuario.id,
-        nombre: usuario.nombre,
+        documento: usuario.documento,
+        nombres: usuario.nombres,
+        apellidos: usuario.apellidos,
+        rol: usuario.rol,
       },
     };
   }

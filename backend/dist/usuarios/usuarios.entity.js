@@ -9,13 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Usuario = exports.EstadoUsuario = void 0;
+exports.Usuario = exports.RolUsuario = exports.EstadoUsuario = void 0;
 const typeorm_1 = require("typeorm");
 var EstadoUsuario;
 (function (EstadoUsuario) {
     EstadoUsuario["ACTIVO"] = "ACTIVO";
     EstadoUsuario["BAJA"] = "BAJA";
 })(EstadoUsuario || (exports.EstadoUsuario = EstadoUsuario = {}));
+var RolUsuario;
+(function (RolUsuario) {
+    RolUsuario["MEDICO"] = "MEDICO";
+    RolUsuario["PACIENTE"] = "PACIENTE";
+    RolUsuario["ADMINISTRADOR"] = "ADMINISTRADOR";
+})(RolUsuario || (exports.RolUsuario = RolUsuario = {}));
 let Usuario = class Usuario {
 };
 exports.Usuario = Usuario;
@@ -26,18 +32,31 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ type: 'text', unique: true }),
     __metadata("design:type", String)
-], Usuario.prototype, "nombre", void 0);
+], Usuario.prototype, "documento", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'text' }),
+    __metadata("design:type", String)
+], Usuario.prototype, "apellidos", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'text' }),
+    __metadata("design:type", String)
+], Usuario.prototype, "nombres", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'text' }),
+    __metadata("design:type", String)
+], Usuario.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'text' }),
     __metadata("design:type", String)
 ], Usuario.prototype, "clave", void 0);
 __decorate([
-    (0, typeorm_1.Column)({
-        type: 'enum',
-        enum: EstadoUsuario,
-    }),
+    (0, typeorm_1.Column)({ type: 'enum', enum: EstadoUsuario }),
     __metadata("design:type", String)
 ], Usuario.prototype, "estado", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'enum', enum: RolUsuario }),
+    __metadata("design:type", String)
+], Usuario.prototype, "rol", void 0);
 exports.Usuario = Usuario = __decorate([
     (0, typeorm_1.Entity)('usuarios')
 ], Usuario);

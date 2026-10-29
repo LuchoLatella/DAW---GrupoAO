@@ -5,20 +5,35 @@ export enum EstadoUsuario {
   BAJA = 'BAJA',
 }
 
+export enum RolUsuario {
+  MEDICO = 'MEDICO',
+  PACIENTE = 'PACIENTE',
+  ADMINISTRADOR = 'ADMINISTRADOR',
+}
+
 @Entity('usuarios')
 export class Usuario {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column({ type: 'text', unique: true })
-  nombre!: string;
+  documento!: string;
+
+  @Column({ type: 'text' })
+  apellidos!: string;
+
+  @Column({ type: 'text' })
+  nombres!: string;
+
+  @Column({ type: 'text' })
+  email!: string;
 
   @Column({ type: 'text' })
   clave!: string;
 
-  @Column({
-    type: 'enum',
-    enum: EstadoUsuario,
-  })
+  @Column({ type: 'enum', enum: EstadoUsuario })
   estado!: EstadoUsuario;
+
+  @Column({ type: 'enum', enum: RolUsuario })
+  rol!: RolUsuario;
 }

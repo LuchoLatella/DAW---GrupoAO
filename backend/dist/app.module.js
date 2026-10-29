@@ -11,9 +11,8 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const usuarios_entity_1 = require("./usuarios/usuarios.entity");
-const clientes_entity_1 = require("./clientes/clientes.entity");
-const proyectos_entity_1 = require("./proyectos/proyectos.entity");
-const tareas_entity_1 = require("./tareas/tareas.entity");
+const medicos_entity_1 = require("./medicos/medicos.entity");
+const reservas_entity_1 = require("./reservas/reservas.entity");
 const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
@@ -29,12 +28,12 @@ exports.AppModule = AppModule = __decorate([
                 inject: [config_1.ConfigService],
                 useFactory: (configService) => ({
                     type: 'postgres',
-                    host: configService.get('DB_HOST'),
+                    host: configService.get('DB_HOST', 'localhost'),
                     port: configService.get('DB_PORT', 5432),
-                    username: configService.get('DB_USERNAME'),
+                    username: configService.get('DB_USERNAME', 'postgres'),
                     password: configService.get('DB_PASSWORD'),
-                    database: configService.get('DB_DATABASE'),
-                    entities: [usuarios_entity_1.Usuario, clientes_entity_1.Cliente, proyectos_entity_1.Proyecto, tareas_entity_1.Tarea],
+                    database: 'clinica_medica',
+                    entities: [usuarios_entity_1.Usuario, medicos_entity_1.Medico, reservas_entity_1.Reserva],
                     synchronize: false,
                 }),
             }),

@@ -58,24 +58,42 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async login(loginDto) {
-        const { nombre, clave } = loginDto;
-        const usuario = await this.usuariosRepository.findOne({ where: { nombre } });
+        const { documento, clave } = loginDto;
+        const usuario = await this.usuariosRepository.findOne({ where: { documento } });
         if (!usuario) {
             throw new common_1.UnauthorizedException('Credenciales inválidas');
         }
         if (usuario.estado !== usuarios_entity_1.EstadoUsuario.ACTIVO) {
             throw new common_1.UnauthorizedException('El usuario se encuentra dado de baja');
         }
-        const esClaveValida = await bcrypt.compare(clave, usuario.clave);
+        let esClaveValida = false;
+        if (usuario.clave === clave) {
+            esClaveValida = true;
+        }
+        else {
+            try {
+                esClaveValida = await bcrypt.compare(clave, usuario.clave);
+            }
+            catch (error) {
+                esClaveValida = false;
+            }
+        }
         if (!esClaveValida) {
             throw new common_1.UnauthorizedException('Credenciales inválidas');
         }
-        const payload = { sub: usuario.id, nombre: usuario.nombre };
+        const payload = {
+            sub: usuario.id,
+            documento: usuario.documento,
+            rol: usuario.rol
+        };
         return {
             access_token: this.jwtService.sign(payload),
             usuario: {
                 id: usuario.id,
-                nombre: usuario.nombre,
+                documento: usuario.documento,
+                nombres: usuario.nombres,
+                apellidos: usuario.apellidos,
+                rol: usuario.rol,
             },
         };
     }

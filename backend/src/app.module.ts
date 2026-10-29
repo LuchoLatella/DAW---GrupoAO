@@ -2,9 +2,8 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Usuario } from './usuarios/usuarios.entity';
-import { Cliente } from './clientes/clientes.entity';
-import { Proyecto } from './proyectos/proyectos.entity';
-import { Tarea } from './tareas/tareas.entity';
+import { Medico } from './medicos/medicos.entity';
+import { Reserva } from './reservas/reservas.entity';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -17,13 +16,13 @@ import { AuthModule } from './auth/auth.module';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('DB_HOST'),
+        host: configService.get<string>('DB_HOST', 'localhost'),
         port: configService.get<number>('DB_PORT', 5432),
-        username: configService.get<string>('DB_USERNAME'),
+        username: configService.get<string>('DB_USERNAME', 'postgres'),
         password: configService.get<string>('DB_PASSWORD'),
-        database: configService.get<string>('DB_DATABASE'),
-        entities: [Usuario, Cliente, Proyecto, Tarea],
-        synchronize: false, // OBLIGATORIO: Mantiene la estructura del script oficial[cite: 3]
+        database: 'clinica_medica', // Forzado explícitamente a clinica_medica
+        entities: [Usuario, Medico, Reserva],
+        synchronize: false, // Obligatorio para respetar el script SQL oficial
       }),
     }),
     AuthModule,
