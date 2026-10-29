@@ -5,12 +5,12 @@ import { Usuario } from './usuarios/usuarios.entity';
 import { Medico } from './medicos/medicos.entity';
 import { Reserva } from './reservas/reservas.entity';
 import { AuthModule } from './auth/auth.module';
+import { MedicosModule } from './medicos/medicos.module';
+import { ReservasModule } from './reservas/reservas.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -20,12 +20,14 @@ import { AuthModule } from './auth/auth.module';
         port: configService.get<number>('DB_PORT', 5432),
         username: configService.get<string>('DB_USERNAME', 'postgres'),
         password: configService.get<string>('DB_PASSWORD'),
-        database: 'clinica_medica', // Forzado explícitamente a clinica_medica
+        database: 'clinica_medica',
         entities: [Usuario, Medico, Reserva],
-        synchronize: false, // Obligatorio para respetar el script SQL oficial
+        synchronize: false,
       }),
     }),
     AuthModule,
+    MedicosModule,
+    ReservasModule,
   ],
   controllers: [],
   providers: [],
