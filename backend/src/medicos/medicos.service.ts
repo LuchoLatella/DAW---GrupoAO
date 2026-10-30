@@ -11,11 +11,10 @@ export class MedicosService {
     private readonly medicosRepository: Repository<Medico>,
   ) {}
 
-  // Buscar un médico por su ID
   async findOne(id: number): Promise<Medico> {
     const medico = await this.medicosRepository.findOne({
       where: { id },
-      relations: ['usuario'],
+      relations: { usuario: true }, // Formato objeto para evitar error de TypeScript
     });
     if (!medico) {
       throw new NotFoundException(`Médico con ID ${id} no encontrado`);
@@ -23,7 +22,6 @@ export class MedicosService {
     return medico;
   }
 
-  // Buscar el perfil de médico según el ID del usuario autenticado
   async findByUsuarioId(id_usuario: number): Promise<Medico> {
     const medico = await this.medicosRepository.findOne({ where: { id_usuario } });
     if (!medico) {
@@ -32,7 +30,6 @@ export class MedicosService {
     return medico;
   }
 
-  // Regla Administrador: Modificar el valor de la consulta
   async updateValorConsulta(id: number, updateDto: UpdateValorConsultaDto): Promise<Medico> {
     const medico = await this.findOne(id);
     medico.valor_consulta = updateDto.valor_consulta;

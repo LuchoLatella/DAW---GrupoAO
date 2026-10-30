@@ -14,15 +14,15 @@ const usuarios_entity_1 = require("./usuarios/usuarios.entity");
 const medicos_entity_1 = require("./medicos/medicos.entity");
 const reservas_entity_1 = require("./reservas/reservas.entity");
 const auth_module_1 = require("./auth/auth.module");
+const medicos_module_1 = require("./medicos/medicos.module");
+const reservas_module_1 = require("./reservas/reservas.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot({
-                isGlobal: true,
-            }),
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
             typeorm_1.TypeOrmModule.forRootAsync({
                 imports: [config_1.ConfigModule],
                 inject: [config_1.ConfigService],
@@ -38,6 +38,8 @@ exports.AppModule = AppModule = __decorate([
                 }),
             }),
             auth_module_1.AuthModule,
+            medicos_module_1.MedicosModule,
+            reservas_module_1.ReservasModule,
         ],
         controllers: [],
         providers: [],
