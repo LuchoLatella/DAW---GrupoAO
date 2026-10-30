@@ -18,8 +18,8 @@ async function bootstrap() {
         transform: true,
     }));
     const config = new swagger_1.DocumentBuilder()
-        .setTitle('API Gestión de Proyectos')
-        .setDescription('Endpoints para la materia Desarrollo de Aplicaciones Web')
+        .setTitle('API Clínica Médica - Grupo AO')
+        .setDescription('Sistema de gestión de reservas y usuarios para una clínica médica - DAW 2026 - Grupo AO')
         .setVersion('1.0')
         .addBearerAuth()
         .build();
