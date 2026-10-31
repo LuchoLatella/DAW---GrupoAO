@@ -19,7 +19,7 @@ import { ReservasModule } from './reservas/reservas.module';
         host: configService.get<string>('DB_HOST', 'localhost'),
         port: configService.get<number>('DB_PORT', 5432),
         username: configService.get<string>('DB_USERNAME', 'postgres'),
-        password: configService.get<string>('DB_PASSWORD'),
+        password: configService.get<string>('DB_PASSWORD', 'postgres'),
         database: 'clinica_medica',
         entities: [Usuario, Medico, Reserva],
         synchronize: false,
