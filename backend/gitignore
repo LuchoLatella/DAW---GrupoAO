@@ -1,0 +1,66 @@
+# ==========================================
+# DEPENDENCIAS & ENTORNOS LOCALES (CRÍTICO)
+# ==========================================
+node_modules/
+.env
+.env.production
+.env.staging
+!.env.example
+
+# ==========================================
+# COMPILACIÓN & DISTRIBUCIÓN
+# ==========================================
+dist/
+build/
+*.tsbuildinfo
+
+# ==========================================
+# DOCUMENTACIÓN GENERADA
+# ==========================================
+documentation/
+compodoc/
+
+# ==========================================
+# ARCHIVOS DE LOGS Y DEPURACIÓN
+# ==========================================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# ==========================================
+# EDITORES DE CÓDIGO E IDEs
+# ==========================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==========================================
+# SISTEMA OPERATIVO Y ARCHIVOS TEMPORALES
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.tmp
+*.bak
+
+# ==========================================
+# ARCHIVOS DE PRUEBAS Y COBERTURA (COBERTURA/JEST)
+# ==========================================
+coverage/
+.nyc_output/
