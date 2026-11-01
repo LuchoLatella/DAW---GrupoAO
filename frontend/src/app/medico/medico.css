@@ -1,0 +1,57 @@
+.medico-container {
+  padding: 40px;
+  font-family: Arial, sans-serif;
+}
+
+.medico-container h1 {
+  color: #1976d2;
+}
+
+.medico-container p {
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.buscar-turnos {
+  margin-top: 30px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buscar-turnos label {
+  font-weight: bold;
+  color: #555;
+}
+
+.buscar-turnos input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.buscar-turnos button {
+  margin-top: 10px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.buscar-turnos button:hover {
+  background-color: #1565c0;
+}
+
+.agenda {
+  margin-top: 40px;
+}
+
+.agenda h2 {
+  color: #333;
+  margin-bottom: 20px;
+}

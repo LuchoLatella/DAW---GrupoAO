@@ -1,1 +1,33 @@
-<p>administrador works!</p>
+<div class="administrador-container">
+  <h1>Panel del Administrador</h1>
+  <p>Gestión de turnos y médicos de la Clínica Médica.</p>
+
+  <div class="acciones">
+    <button>Reservar turno</button>
+    <button>Ver reservas</button>
+  </div>
+
+  <div class="valor-consulta">
+    <h2>Modificar valor de consulta</h2>
+
+    <label for="medico">Médico</label>
+    <select
+      id="medico"
+      [value]="medicoId"
+      (change)="medicoId = $any($event.target).value"
+    >
+      <option value="">Seleccione un médico</option>
+    </select>
+
+    <label for="valor">Nuevo valor</label>
+    <input
+      type="number"
+      id="valor"
+      placeholder="Ingrese el nuevo valor"
+      [value]="nuevoValor ?? ''"
+      (input)="nuevoValor = +$any($event.target).value"
+    >
+
+    <button (click)="actualizarValor()">Actualizar valor</button>
+  </div>
+</div>
