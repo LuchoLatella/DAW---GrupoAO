@@ -1,1 +1,39 @@
-<p>paciente works!</p>
+<div class="paciente-container">
+  <h1>Panel del Paciente</h1>
+  <p>Bienvenido al sistema de turnos de la Clínica Médica.</p>
+
+  <div class="acciones">
+    <button>Reservar turno</button>
+    <button (click)="verMisTurnos()">Mis reservas</button>
+  </div>
+
+  <div class="reservar-turno">
+    <h2>Reservar turno</h2>
+
+    <label for="medico">Médico</label>
+    <select id="medico">
+      <option value="">Seleccione un médico</option>
+    </select>
+
+    <label for="fecha">Fecha</label>
+    <input type="date" id="fecha">
+
+    <button>Buscar horarios disponibles</button>
+  </div>
+
+  <div class="mis-turnos">
+    <h2>Mis turnos</h2>
+
+    @if (turnos.length === 0) {
+      <p>No hay turnos para mostrar.</p>
+    }
+
+    @for (turno of turnos; track turno.id) {
+      <div class="turno">
+        <p><strong>Fecha:</strong> {{ turno.fecha_hora }}</p>
+        <p><strong>Estado:</strong> {{ turno.estado }}</p>
+        <p><strong>Valor:</strong> ${{ turno.valor_consulta }}</p>
+      </div>
+    }
+  </div>
+</div>

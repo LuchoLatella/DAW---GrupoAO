@@ -1,0 +1,64 @@
+.administrador-container {
+  padding: 40px;
+  font-family: Arial, sans-serif;
+}
+
+.administrador-container h1 {
+  color: #1976d2;
+}
+
+.administrador-container p {
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.acciones {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.acciones button,
+.valor-consulta button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.acciones button:hover,
+.valor-consulta button:hover {
+  background-color: #1565c0;
+}
+
+.valor-consulta {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.valor-consulta h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.valor-consulta label {
+  font-weight: bold;
+  color: #555;
+}
+
+.valor-consulta select,
+.valor-consulta input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.valor-consulta button {
+  margin-top: 10px;
+}

@@ -1,1 +1,42 @@
-<p>medico works!</p>
+<div class="medico-container">
+  <h1>Panel del Médico</h1>
+  <p>Consulte los turnos reservados para una fecha.</p>
+
+  <div class="buscar-turnos">
+    <label for="fecha">Fecha</label>
+
+    <input
+      type="date"
+      id="fecha"
+      [value]="fecha"
+      (change)="fecha = $any($event.target).value"
+    >
+
+    <button (click)="buscarTurnos()">Buscar turnos</button>
+  </div>
+
+  <div class="agenda">
+    <h2>Agenda del día</h2>
+
+    @if (turnos.length === 0) {
+      <p>No hay turnos para mostrar.</p>
+    }
+
+    @for (turno of turnos; track turno.id) {
+      <div class="turno">
+        <p><strong>Fecha y hora:</strong> {{ turno.fecha_hora }}</p>
+        <p><strong>Estado:</strong> {{ turno.estado }}</p>
+
+        <div class="acciones-turno">
+          <button (click)="cambiarEstado(turno.id, 'ATENDIDO')">
+            Atendido
+          </button>
+
+          <button (click)="cambiarEstado(turno.id, 'AUSENTE')">
+            Ausente
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
