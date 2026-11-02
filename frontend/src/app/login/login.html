@@ -11,6 +11,7 @@
         <label for="documento">Documento</label>
         <input
           type="text"
+          id="documento"
           name="documento"
           [(ngModel)]="documento"
           placeholder="Ingrese su documento"
@@ -21,6 +22,7 @@
         <label for="clave">Contraseña</label>
         <input
           type="password"
+          id="clave"
           name="clave"
           [(ngModel)]="clave"
           placeholder="Ingrese su contraseña"
@@ -30,6 +32,10 @@
       <button type="submit">
         Iniciar sesión
       </button>
+
+    @if (mensajeError()) {
+  <p class="mensaje-error">{{ mensajeError() }}</p>
+}
 
     </form>
 

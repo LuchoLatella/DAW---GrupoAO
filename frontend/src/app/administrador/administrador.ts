@@ -11,6 +11,7 @@ export class Administrador {
 
   medicoId = '';
   nuevoValor: number | null = null;
+  mensaje = '';
 
   constructor(private medicosService: Medicos) {}
 
@@ -24,9 +25,11 @@ export class Administrador {
       .subscribe({
         next: (respuesta) => {
           console.log('Valor actualizado:', respuesta);
+          this.mensaje = 'Valor de consulta actualizado correctamente.';
         },
         error: (error) => {
           console.log('Error al actualizar el valor:', error);
+          this.mensaje = 'No se pudo actualizar el valor de consulta.';
         }
       });
   }

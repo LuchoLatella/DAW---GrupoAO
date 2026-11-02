@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (route) => {
   const usuarioGuardado = localStorage.getItem('usuario');
 
   if (!token || !usuarioGuardado) {
-    router.navigate(['/login']);
+    router.navigate(['/']);
     return false;
   }
 
@@ -16,7 +16,7 @@ export const authGuard: CanActivateFn = (route) => {
   const rolPermitido = route.data['rol'];
 
   if (rolPermitido && usuario.rol !== rolPermitido) {
-    router.navigate(['/login']);
+    router.navigate(['/']);
     return false;
   }
 
