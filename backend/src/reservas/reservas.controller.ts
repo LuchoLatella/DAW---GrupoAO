@@ -16,7 +16,31 @@ export class ReservasController {
     private readonly reservasService: ReservasService,
     private readonly medicosService: MedicosService,
   ) {}
+@Get()
+@Roles(RolUsuario.ADMINISTRADOR)
+@ApiOperation({ summary: 'Listar todas las reservas del sistema' })
+async listarReservas() {
+  const reservas = await this.reservasService.findAll();
 
+  return reservas.map((reserva) => ({
+    id: reserva.id,
+    fecha_hora: reserva.fecha_hora,
+    estado: reserva.estado,
+    valor_consulta: reserva.valor_consulta,
+    paciente: reserva.paciente
+  ? {
+      id: reserva.paciente.id,
+      nombres: reserva.paciente.nombres,
+      apellidos: reserva.paciente.apellidos,
+    }
+  : null,
+    medico: reserva.medico
+      ? {
+          id: reserva.medico.id,
+        }
+      : null,
+  }));
+}
   @Get('mis-turnos')
   @Roles(RolUsuario.MEDICO)
   @ApiOperation({ summary: 'Permite al médico ver sus turnos reservados para una fecha (YYYY-MM-DD)' })
@@ -59,15 +83,27 @@ export class ReservasController {
   }
   
 @Post()
-@Roles(RolUsuario.PACIENTE)
+@Roles(RolUsuario.PACIENTE, RolUsuario.ADMINISTRADOR)
 @ApiOperation({ summary: 'Crear una reserva' })
 crearReserva(
   @Body() dto: CreateReservaDto,
   @Request() req: any,
 ) {
+  let idPaciente = req.user.userId;
+
+  if (req.user.rol === RolUsuario.ADMINISTRADOR) {
+    if (!dto.id_paciente) {
+      throw new BadRequestException(
+        'Debe indicar el ID del paciente'
+      );
+    }
+
+    idPaciente = dto.id_paciente;
+  }
+
   return this.reservasService.crearReserva(
     dto,
-    req.user.userId,
+    idPaciente,
   );
 }
 

@@ -71,3 +71,33 @@
   color: #1565c0 !important;
   font-weight: bold;
 }
+
+.lista-reservas {
+  margin-bottom: 40px;
+}
+
+.lista-reservas h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.lista-reservas table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lista-reservas th,
+.lista-reservas td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.lista-reservas th {
+  background-color: #1976d2;
+  color: white;
+}
+
+.lista-reservas tr:nth-child(even) {
+  background-color: #f5f5f5;
+}

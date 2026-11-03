@@ -4,7 +4,7 @@ import {
   BadRequestException,
   ForbiddenException
 } from '@nestjs/common';
-
+import { Usuario, RolUsuario, EstadoUsuario } from '../usuarios/usuarios.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Between } from 'typeorm';
 
@@ -22,7 +22,10 @@ export class ReservasService {
 
     @InjectRepository(Medico)
     private readonly medicosRepository: Repository<Medico>,
-  ) {}
+    @InjectRepository(Usuario)
+    private readonly usuariosRepository: Repository<Usuario>,
+
+  ) { }
 
   async findByMedicoYFecha(
     id_medico: number,
@@ -200,7 +203,24 @@ export class ReservasService {
     dto: CreateReservaDto,
     idPaciente: number
   ): Promise<Reserva> {
+    const paciente = await this.usuariosRepository.findOne({
+      where: { id: idPaciente },
+    });
 
+    if (!paciente) {
+      throw new NotFoundException('El paciente no existe');
+    }
+
+    if (paciente.rol !== RolUsuario.PACIENTE) {
+      throw new BadRequestException(
+        'El usuario seleccionado no es un paciente'
+      );
+    }
+    if (paciente.estado !== EstadoUsuario.ACTIVO) {
+      throw new BadRequestException(
+        'El paciente no está activo'
+      );
+    }
     const fechaHora = new Date(
       dto.fecha_hora
     );
@@ -352,4 +372,17 @@ export class ReservasService {
       reserva
     );
   }
+
+  async findAll(): Promise<Reserva[]> {
+    return await this.reservasRepository.find({
+      relations: {
+        paciente: true,
+        medico: true,
+      },
+      order: {
+        fecha_hora: 'ASC',
+      },
+    });
+  }
+
 }

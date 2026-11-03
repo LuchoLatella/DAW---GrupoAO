@@ -1,7 +1,6 @@
 
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsISO8601, Min } from 'class-validator';
-
+import { IsInt, IsISO8601, IsOptional, Min } from 'class-validator';
 export class CreateReservaDto {
   @ApiProperty({
     example: 1,
@@ -17,4 +16,15 @@ export class CreateReservaDto {
   })
   @IsISO8601({ strict: true })
   fecha_hora!: string;
+
+  @ApiProperty({
+  example: 6,
+  description: 'ID del paciente (utilizado por el administrador)',
+  required: false,
+})
+@IsOptional()
+@IsInt()
+@Min(1)
+id_paciente?: number;
+
 }
