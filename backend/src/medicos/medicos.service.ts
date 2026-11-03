@@ -30,6 +30,19 @@ export class MedicosService {
     return medico;
   }
 
+  async findAll() {
+  const medicos = await this.medicosRepository.find({
+    relations: { usuario: true },
+  });
+
+  return medicos.map((medico) => ({
+    id: medico.id,
+    nombres: medico.usuario.nombres,
+    apellidos: medico.usuario.apellidos,
+    matricula: medico.matricula,
+    valor_consulta: medico.valor_consulta,
+  }));
+}
   async updateValorConsulta(id: number, updateDto: UpdateValorConsultaDto): Promise<Medico> {
     const medico = await this.findOne(id);
     medico.valor_consulta = updateDto.valor_consulta;

@@ -8,6 +8,10 @@ export class Medicos {
 
   constructor(private http: HttpClient) {}
 
+  listarMedicos() {
+    return this.http.get<any[]>('/api/medicos');
+  }
+
   actualizarValorConsulta(id: number, valorConsulta: number) {
     return this.http.patch(
       `/api/medicos/${id}/valor-consulta`,

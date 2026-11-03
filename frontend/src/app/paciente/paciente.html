@@ -11,14 +11,50 @@
     <h2>Reservar turno</h2>
 
     <label for="medico">Médico</label>
-    <select id="medico">
+
+    <select id="medico" [value]="medicoId" (change)="medicoId = $any($event.target).value">
       <option value="">Seleccione un médico</option>
+
+      @for (medico of medicos; track medico.id) {
+        <option [value]="medico.id">
+          {{ medico.nombres }} {{ medico.apellidos }} - ${{ medico.valor_consulta }}
+        </option>
+      }
     </select>
 
     <label for="fecha">Fecha</label>
-    <input type="date" id="fecha">
 
-    <button>Buscar horarios disponibles</button>
+    <input
+        type="date"
+        id="fecha"
+        [value]="fecha"
+        [min]="fechaMinima"
+        [max]="fechaMaxima"
+        (change)="fecha = $any($event.target).value"
+      >
+
+    <button (click)="buscarHorarios()">Buscar horarios disponibles</button>
+    @if (mensaje) {
+      <p class="mensaje">
+        {{ mensaje }}
+      </p>
+    }
+
+    @if (horarios.length > 0) {
+      <div class="horarios-disponibles">
+        <h3>Horarios disponibles</h3>
+
+        <div class="horarios">
+          @for (horario of horarios; track horario) {
+            <button class="horario" (click)="reservarTurno(horario)">
+              {{ horario }}
+            </button>
+          }
+        </div>
+      </div>
+    } @else if (busquedaRealizada) {
+      <p class="sin-horarios">No hay horarios disponibles para esta fecha.</p>
+    }
   </div>
 
   <div class="mis-turnos">
@@ -30,9 +66,24 @@
 
     @for (turno of turnos; track turno.id) {
       <div class="turno">
-        <p><strong>Fecha:</strong> {{ turno.fecha_hora }}</p>
-        <p><strong>Estado:</strong> {{ turno.estado }}</p>
-        <p><strong>Valor:</strong> ${{ turno.valor_consulta }}</p>
+        <p>
+          <strong>Fecha:</strong>
+          {{ formatearFecha(turno.fecha_hora) }} hs
+        </p>
+
+        @if (turno.estado === 'ACTIVO') {
+          <button class="cancelar" (click)="cancelarTurno(turno.id)">Cancelar turno</button>
+        }
+
+        <p>
+          <strong>Estado:</strong>
+          {{ turno.estado }}
+        </p>
+
+        <p>
+          <strong>Valor:</strong>
+          ${{ turno.valor_consulta }}
+        </p>
       </div>
     }
   </div>

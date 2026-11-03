@@ -23,4 +23,11 @@ export class MedicosController {
   ) {
     return this.medicosService.updateValorConsulta(id, updateValorConsultaDto);
   }
+
+  @Get()
+@Roles(RolUsuario.PACIENTE, RolUsuario.ADMINISTRADOR)
+@ApiOperation({ summary: 'Listar médicos disponibles' })
+findAll() {
+  return this.medicosService.findAll();
+}
 }

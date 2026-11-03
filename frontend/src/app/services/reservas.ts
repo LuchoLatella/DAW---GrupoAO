@@ -9,7 +9,23 @@ export class Reservas {
   constructor(private http: HttpClient) {}
 
   misTurnos() {
-    return this.http.get<any[]>('/api/reservas/mis-turnos');
+  return this.http.get<any[]>('/api/reservas/mis-reservas');
+  }
+
+  horariosDisponibles(idMedico: number, fecha: string) {
+    return this.http.get<any[]>(
+      `/api/reservas/disponibles?id_medico=${idMedico}&fecha=${fecha}`
+    );
+  }
+
+  crearReserva(idMedico: number, fechaHora: string) {
+    return this.http.post(
+      '/api/reservas',
+      {
+        id_medico: idMedico,
+        fecha_hora: fechaHora
+      }
+    );
   }
 
   turnosMedico(fecha: string) {
@@ -23,5 +39,12 @@ export class Reservas {
       `/api/reservas/${id}/estado`,
       { estado: estado }
     );
+  }
+
+  cancelarReserva(id: number) {
+  return this.http.patch(
+    `/api/reservas/${id}/cancelar`,
+    {}
+  );
   }
 }
