@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { Reservas } from '../services/reservas';
 
 @Component({
@@ -12,7 +12,10 @@ export class Medico {
   fecha = '';
   turnos: any[] = [];
 
-  constructor(private reservasService: Reservas) {}
+  constructor(
+    private reservasService: Reservas,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   buscarTurnos() {
     if (!this.fecha) {
@@ -23,6 +26,8 @@ export class Medico {
       next: (respuesta) => {
         this.turnos = respuesta;
         console.log('Turnos del médico:', respuesta);
+
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.log('Error al obtener los turnos:', error);
