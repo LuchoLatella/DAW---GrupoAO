@@ -20,6 +20,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { RolUsuario } from '../usuarios/usuarios.entity';
 import { CreateReservaDto } from './dto/create-reserva.dto';
+import { ReservaResponseDto } from './dto/reserva-response.dto';
 
 @ApiTags('Reservas')
 @ApiBearerAuth()
@@ -34,14 +35,14 @@ export class ReservasController {
   @Get()
   @Roles(RolUsuario.ADMINISTRADOR)
   @ApiOperation({ summary: 'Listar todas las reservas del sistema' })
-  async listarReservas() {
+  async listarReservas(): Promise<ReservaResponseDto[]> {
     const reservas = await this.reservasService.findAll();
 
     return reservas.map((reserva) => ({
       id: reserva.id,
       fecha_hora: reserva.fecha_hora,
       estado: reserva.estado,
-      monto_consulta: reserva.monto_consulta, // 👈 Mapeado correctamente desde PostgreSQL
+      monto_consulta: reserva.monto_consulta,
       paciente: reserva.paciente
         ? {
             id: reserva.paciente.id,
