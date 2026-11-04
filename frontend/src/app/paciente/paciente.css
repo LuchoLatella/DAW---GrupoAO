@@ -1,95 +1,303 @@
+
 .paciente-container {
-  padding: 40px;
-  font-family: Arial, sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 32px;
+  font-family: 'Source Sans 3', sans-serif;
+  color: #283B35;
 }
 
 .paciente-container h1 {
-  color: #1976d2;
+  margin: 0 0 8px;
+  color: #283B35;
+  font-size: 28px;
+  font-weight: 600;
 }
 
-.paciente-container p {
-  color: #555;
-  margin-bottom: 30px;
+.paciente-container > p {
+  margin: 0 0 28px;
+  color: #66746D;
+  font-size: 16px;
 }
+
+/* Botones superiores */
 
 .acciones {
   display: flex;
-  gap: 15px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .acciones button {
-  padding: 12px 20px;
-  border: none;
+  padding: 10px 20px;
+  border: 1px solid #53786B;
   border-radius: 5px;
-  background-color: #1976d2;
-  color: white;
-  cursor: pointer;
+  background-color: #53786B;
+  color: #FFFFFF;
   font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .acciones button:hover {
-  background-color: #1565c0;
+  background-color: #426357;
 }
+
+/* Formulario para reservar */
+
+.reservar-turno {
+  margin-top: 30px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  background-color: #FFFFFF;
+  border: 1px solid #D5DED8;
+  border-radius: 8px;
+}
+
+.reservar-turno h2 {
+  margin: 0 0 10px;
+  color: #283B35;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.reservar-turno label {
+  color: #283B35;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.reservar-turno select,
+.reservar-turno input {
+  width: 100%;
+  padding: 11px 12px;
+  background-color: #FFFFFF;
+  border: 1px solid #D5DED8;
+  border-radius: 5px;
+  color: #283B35;
+  font-size: 15px;
+}
+
+.reservar-turno select:focus,
+.reservar-turno input:focus {
+  outline: none;
+  border-color: #53786B;
+  box-shadow: 0 0 0 2px rgba(83, 120, 107, 0.12);
+}
+
+.reservar-turno > button {
+  margin-top: 10px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #53786B;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.reservar-turno > button:hover {
+  background-color: #426357;
+}
+
+/* Horarios disponibles */
+
+.horarios-disponibles {
+  margin-top: 12px;
+}
+
+.horarios-disponibles h3 {
+  margin: 0 0 12px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #283B35;
+}
+
+.horarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.horarios .horario {
+  margin: 0;
+  padding: 9px 16px;
+  background-color: #E7EEE9;
+  border: 1px solid #C7D8CE;
+  border-radius: 5px;
+  color: #365D4F;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.horarios .horario:hover {
+  background-color: #D4E4D9;
+  border-color: #53786B;
+}
+
+/* Mensajes */
+
+.reservar-turno .mensaje {
+  margin: 8px 0;
+  padding: 11px 14px;
+  background-color: #E7EEE9;
+  border-left: 3px solid #53786B;
+  border-radius: 4px;
+  color: #283B35;
+  font-size: 14px;
+}
+
+.reservar-turno .sin-horarios {
+  margin: 10px 0 0;
+  color: #66746D;
+  font-size: 14px;
+}
+
+/* Mis reservas */
 
 .mis-turnos {
   margin-top: 40px;
 }
 
 .mis-turnos h2 {
-  color: #333;
-  margin-bottom: 20px;
+  margin: 0 0 20px;
+  color: #283B35;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 .turno {
-  border: 1px solid #ddd;
+  max-width: 520px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  background-color: #FFFFFF;
+  border: 1px solid #D5DED8;
   border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 15px;
-  max-width: 500px;
 }
 
 .turno p {
-  margin: 8px 0;
-  color: #555;
-}
-
-.reservar-turno {
-  margin-top: 40px;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.reservar-turno h2 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.reservar-turno label {
-  font-weight: bold;
-  color: #555;
-}
-
-.reservar-turno select,
-.reservar-turno input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  margin: 7px 0;
+  color: #46564E;
   font-size: 15px;
 }
 
-.reservar-turno button {
-  margin-top: 10px;
-  padding: 12px 20px;
-  border: none;
+.turno strong {
+  color: #283B35;
+  font-weight: 600;
+}
+
+/* Cancelar turno */
+
+.turno .cancelar {
+  margin-top: 12px;
+  padding: 9px 16px;
+  background-color: #FFFFFF;
+  border: 1px solid #B66B6B;
   border-radius: 5px;
-  background-color: #1976d2;
-  color: white;
+  color: #A44E4E;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 15px;
 }
 
-.reservar-turno button:hover {
-  background-color: #1565c0;
+.turno .cancelar:hover {
+  background-color: #FAEEEE;
+}
+
+/* Pantallas pequeñas */
+
+@media (max-width: 600px) {
+  .paciente-container {
+    padding: 24px 16px;
+  }
+
+  .reservar-turno {
+    padding: 20px;
+  }
+
+  .turno {
+    padding: 18px;
+  }
+}
+
+.reservar-turno,
+.mis-turnos {
+  margin-top: 24px;
+}
+
+/* Tabla de reservas del paciente */
+
+.mis-turnos {
+  margin-top: 24px;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+
+.mis-turnos h2 {
+  margin: 0 0 18px;
+  color: #283B35;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.mis-turnos table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #FFFFFF;
+  font-size: 14px;
+}
+
+.mis-turnos th,
+.mis-turnos td {
+  padding: 13px 15px;
+  border-bottom: 1px solid #D5DED8;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.mis-turnos th {
+  background-color: #E7EEE9;
+  color: #283B35;
+  font-weight: 600;
+}
+
+.mis-turnos td {
+  color: #46564E;
+}
+
+.mis-turnos tr:nth-child(even) {
+  background-color: #FAFAF8;
+}
+
+.mis-turnos tbody tr:hover {
+  background-color: #F0F5F1;
+}
+
+/* Botón cancelar */
+
+.mis-turnos .cancelar {
+  margin: 0;
+  padding: 7px 12px;
+  background-color: #FFFFFF;
+  border: 1px solid #B66B6B;
+  border-radius: 5px;
+  color: #A44E4E;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mis-turnos .cancelar:hover {
+  background-color: #FAEEEE;
+}
+
+@media (max-width: 768px) {
+  .mis-turnos table {
+    min-width: 600px;
+  }
 }

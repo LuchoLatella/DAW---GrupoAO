@@ -1,35 +1,62 @@
+
 .medico-container {
-  padding: 40px;
-  font-family: Arial, sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 32px;
+  font-family: 'Source Sans 3', sans-serif;
+  color: #283B35;
 }
 
+/* Encabezado */
+
 .medico-container h1 {
-  color: #1976d2;
+  margin: 0 0 8px;
+  color: #283B35;
+  font-size: 28px;
+  font-weight: 600;
 }
 
 .medico-container p {
-  color: #555;
+  color: #66746D;
   margin-bottom: 30px;
+  font-size: 16px;
 }
+
+/* Buscar turnos */
 
 .buscar-turnos {
   margin-top: 30px;
-  max-width: 500px;
+  max-width: 520px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  padding: 28px;
+  background-color: #FFFFFF;
+  border: 1px solid #D5DED8;
+  border-radius: 8px;
 }
 
 .buscar-turnos label {
-  font-weight: bold;
-  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+  color: #283B35;
 }
 
 .buscar-turnos input {
-  padding: 10px;
-  border: 1px solid #ccc;
+  width: 100%;
+  padding: 11px 12px;
+  background-color: #FFFFFF;
+  border: 1px solid #D5DED8;
   border-radius: 5px;
+  color: #283B35;
+  font-family: inherit;
   font-size: 15px;
+}
+
+.buscar-turnos input:focus {
+  outline: none;
+  border-color: #53786B;
+  box-shadow: 0 0 0 2px rgba(83, 120, 107, 0.12);
 }
 
 .buscar-turnos button {
@@ -37,21 +64,114 @@
   padding: 12px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #1976d2;
-  color: white;
-  cursor: pointer;
+  background-color: #53786B;
+  color: #FFFFFF;
+  font-family: inherit;
   font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .buscar-turnos button:hover {
-  background-color: #1565c0;
+  background-color: #426357;
 }
+
+.buscar-turnos button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Agenda médica */
 
 .agenda {
   margin-top: 40px;
 }
 
 .agenda h2 {
-  color: #333;
+  color: #283B35;
+  font-size: 22px;
+  font-weight: 600;
   margin-bottom: 20px;
+}
+
+.agenda button {
+  padding: 9px 16px;
+  margin: 5px 8px 5px 0;
+  border: 1px solid #53786B;
+  border-radius: 5px;
+  background-color: #E7EEE9;
+  color: #283B35;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.agenda button:hover {
+  background-color: #D5E3DA;
+}
+
+/* Pantallas pequeñas */
+
+@media (max-width: 600px) {
+  .medico-container {
+    padding: 24px 16px;
+  }
+
+  .buscar-turnos {
+    padding: 20px;
+  }
+}
+
+/* Tarjetas de turnos */
+
+.turno {
+  max-width: 650px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+  background-color: #FFFFFF;
+  border: 1px solid #D5DED8;
+  border-radius: 8px;
+}
+
+.turno-info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #46564E;
+}
+
+.turno-info strong {
+  color: #283B35;
+}
+
+.estado {
+  font-weight: 600;
+  color: #53786B;
+}
+
+.acciones-turno {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.agenda .acciones-turno button {
+  margin: 0;
+}
+
+.agenda .acciones-turno button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .turno {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

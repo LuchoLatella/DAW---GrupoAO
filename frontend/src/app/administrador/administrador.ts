@@ -38,6 +38,7 @@ fechaReserva = '';
 horaReserva = '';
 horariosDisponibles: string[] = [];
 ahora = new Date().toISOString();
+vistaActual: 'reservas' | 'reservar' | 'valor' = 'reservas';
 constructor(
   private medicosService: Medicos,
   private reservasService: Reservas,

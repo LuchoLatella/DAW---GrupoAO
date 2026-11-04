@@ -167,7 +167,7 @@ export class ReservasService {
     // No permitir reservas en el pasado
     if (fechaHora <= ahora) {
       throw new BadRequestException(
-        'No se pueden reservar turnos en el pasado'
+        'No se pueden reservar turnos que ya han pasado'
       );
     }
 

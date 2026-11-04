@@ -12,7 +12,7 @@ export class Paciente implements OnInit {
 
   turnos: any[] = [];
   medicos: any[] = [];
-
+vistaActual: 'reservar' | 'reservas' = 'reservar';
   medicoId = '';
   fecha = '';
   horarios: any[] = [];
