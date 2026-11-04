@@ -13,9 +13,9 @@ export class Medicos {
   }
 
   actualizarValorConsulta(id: number, valorConsulta: number) {
-    return this.http.patch(
-      `/api/medicos/${id}/valor-consulta`,
-      { valorConsulta: valorConsulta }
-    );
-  }
+  return this.http.patch(
+    `/api/medicos/${id}/valor-consulta`,
+    { valor_consulta: valorConsulta }
+  );
+}
 }

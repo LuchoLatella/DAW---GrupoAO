@@ -1,30 +1,43 @@
+
 <div class="paciente-container">
   <h1>Panel del Paciente</h1>
   <p>Bienvenido al sistema de turnos de la Clínica Médica.</p>
 
+  <!-- MENÚ -->
   <div class="acciones">
-    <button>Reservar turno</button>
-    <button (click)="verMisTurnos()">Mis reservas</button>
+    <button (click)="vistaActual = 'reservar'">
+      Reservar turno
+    </button>
+
+    <button (click)="vistaActual = 'reservas'; verMisTurnos()">
+      Mis reservas
+    </button>
   </div>
 
-  <div class="reservar-turno">
-    <h2>Reservar turno</h2>
+  <!-- RESERVAR TURNO -->
+  @if (vistaActual === 'reservar') {
+    <div class="reservar-turno">
+      <h2>Reservar turno</h2>
 
-    <label for="medico">Médico</label>
+      <label for="medico">Médico</label>
 
-    <select id="medico" [value]="medicoId" (change)="medicoId = $any($event.target).value">
-      <option value="">Seleccione un médico</option>
+      <select
+        id="medico"
+        [value]="medicoId"
+        (change)="medicoId = $any($event.target).value"
+      >
+        <option value="">Seleccione un médico</option>
 
-      @for (medico of medicos; track medico.id) {
-        <option [value]="medico.id">
-          {{ medico.nombres }} {{ medico.apellidos }} - ${{ medico.valor_consulta }}
-        </option>
-      }
-    </select>
+        @for (medico of medicos; track medico.id) {
+          <option [value]="medico.id">
+            {{ medico.nombres }} {{ medico.apellidos }} - ${{ medico.valor_consulta }}
+          </option>
+        }
+      </select>
 
-    <label for="fecha">Fecha</label>
+      <label for="fecha">Fecha</label>
 
-    <input
+      <input
         type="date"
         id="fecha"
         [value]="fecha"
@@ -33,58 +46,83 @@
         (change)="fecha = $any($event.target).value"
       >
 
-    <button (click)="buscarHorarios()">Buscar horarios disponibles</button>
-    @if (mensaje) {
-      <p class="mensaje">
-        {{ mensaje }}
-      </p>
-    }
+      <button (click)="buscarHorarios()">
+        Buscar horarios disponibles
+      </button>
 
-    @if (horarios.length > 0) {
-      <div class="horarios-disponibles">
-        <h3>Horarios disponibles</h3>
+      @if (mensaje) {
+        <p class="mensaje">
+          {{ mensaje }}
+        </p>
+      }
 
-        <div class="horarios">
-          @for (horario of horarios; track horario) {
-            <button class="horario" (click)="reservarTurno(horario)">
-              {{ horario }}
-            </button>
-          }
+      @if (horarios.length > 0) {
+        <div class="horarios-disponibles">
+          <h3>Horarios disponibles</h3>
+
+          <div class="horarios">
+            @for (horario of horarios; track horario) {
+              <button
+                class="horario"
+                (click)="reservarTurno(horario)"
+              >
+                {{ horario }}
+              </button>
+            }
+          </div>
         </div>
-      </div>
-    } @else if (busquedaRealizada) {
-      <p class="sin-horarios">No hay horarios disponibles para esta fecha.</p>
-    }
-  </div>
+      } @else if (busquedaRealizada) {
+        <p class="sin-horarios">
+          No hay horarios disponibles para esta fecha.
+        </p>
+      }
+    </div>
+  }
 
+  
+<!-- MIS RESERVAS -->
+@if (vistaActual === 'reservas') {
   <div class="mis-turnos">
-    <h2>Mis turnos</h2>
+    <h2>Mis reservas</h2>
 
-    @if (turnos.length === 0) {
-      <p>No hay turnos para mostrar.</p>
-    }
+    @if (turnos.length > 0) {
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha y hora</th>
+            <th>Estado</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
 
-    @for (turno of turnos; track turno.id) {
-      <div class="turno">
-        <p>
-          <strong>Fecha:</strong>
-          {{ formatearFecha(turno.fecha_hora) }} hs
-        </p>
+        <tbody>
+          @for (turno of turnos; track turno.id) {
+            <tr>
+              <td>
+                {{ formatearFecha(turno.fecha_hora) }} hs
+              </td>
 
-        @if (turno.estado === 'ACTIVO') {
-          <button class="cancelar" (click)="cancelarTurno(turno.id)">Cancelar turno</button>
-        }
+              <td>{{ turno.estado }}</td>
 
-        <p>
-          <strong>Estado:</strong>
-          {{ turno.estado }}
-        </p>
+              <td>${{ turno.valor_consulta }}</td>
 
-        <p>
-          <strong>Valor:</strong>
-          ${{ turno.valor_consulta }}
-        </p>
-      </div>
+              <td>
+                @if (turno.estado === 'ACTIVO') {
+                  <button
+                    class="cancelar"
+                    (click)="cancelarTurno(turno.id)"
+                  >
+                    Cancelar
+                  </button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p>No hay reservas cargadas.</p>
     }
   </div>
-</div>
+}

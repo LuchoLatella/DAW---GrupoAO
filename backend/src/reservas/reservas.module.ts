@@ -6,10 +6,11 @@ import { ReservasService } from './reservas.service';
 import { ReservasController } from './reservas.controller';
 import { MedicosModule } from '../medicos/medicos.module';
 import { Medico } from '../medicos/medicos.entity';
+import { Usuario } from '../usuarios/usuarios.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Reserva, Medico]),
+   TypeOrmModule.forFeature([Reserva, Medico, Usuario]),
     MedicosModule,
   ],
   controllers: [ReservasController],

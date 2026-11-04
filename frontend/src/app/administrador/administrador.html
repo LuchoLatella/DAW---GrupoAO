@@ -1,40 +1,167 @@
+
 <div class="administrador-container">
   <h1>Panel del Administrador</h1>
   <p>Gestión de turnos y médicos de la Clínica Médica.</p>
 
+  <!-- MENÚ DE ADMINISTRACIÓN -->
   <div class="acciones">
-    <button>Reservar turno</button>
-    <button>Ver reservas</button>
+    <button (click)="vistaActual = 'reservas'; listarReservas()">
+      Ver reservas
+    </button>
+
+    <button (click)="vistaActual = 'reservar'">
+      Reservar turno
+    </button>
+
+    <button (click)="vistaActual = 'valor'">
+      Modificar valor de consulta
+    </button>
   </div>
 
-  <div class="valor-consulta">
-    <h2>Modificar valor de consulta</h2>
+  <!-- RESERVAS DEL SISTEMA -->
+  @if (vistaActual === 'reservas') {
+    <div class="lista-reservas">
+      <h2>Reservas del sistema</h2>
 
-    <label for="medico">Médico</label>
+      @if (reservas.length > 0) {
+        <table>
+          <thead>
+            <tr>
+              <th>Paciente</th>
+              <th>Médico</th>
+              <th>Fecha y hora</th>
+              <th>Estado</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
 
-    <select
-      id="medico"
-      [value]="medicoId"
-      (change)="medicoId = $any($event.target).value"
-    >
-      <option value="">Seleccione un médico</option>
-    </select>
+          <tbody>
+            @for (reserva of reservas; track reserva.id) {
+              <tr>
+                <td>
+                  {{ reserva.paciente?.nombres }}
+                  {{ reserva.paciente?.apellidos }}
+                </td>
+                <td>{{ reserva.medico?.id }}</td>
+                <td>
+                  {{ reserva.fecha_hora | date:'dd/MM/yyyy HH:mm' }}
+                </td>
+                <td>{{ reserva.estado }}</td>
+                <td>{{ reserva.valor_consulta }}</td>
+                <td>
+                  @if (reserva.estado === 'ACTIVO') {
+                    <button
+                      (click)="cancelarReserva(reserva.id)"
+                      [disabled]="reserva.fecha_hora <= ahora"
+                    >
+                      Cancelar
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <p>No hay reservas cargadas.</p>
+      }
+    </div>
+  }
 
-    <label for="valor">Nuevo valor</label>
+  <!-- FORMULARIO PARA RESERVAR -->
+  @if (vistaActual === 'reservar') {
+    <div class="valor-consulta">
+      <h2>Nueva reserva</h2>
 
-    <input
-      type="number"
-      id="valor"
-      placeholder="Ingrese el nuevo valor"
-      [value]="nuevoValor ?? ''"
-      (input)="nuevoValor = +$any($event.target).value"
-    >
+      <label>ID del paciente</label>
+      <input
+        type="number"
+        [value]="idPaciente"
+        (input)="idPaciente = $any($event.target).value"
+      >
 
-    <button (click)="actualizarValor()">Actualizar valor</button>
+      <label>Médico</label>
+      <select
+        [value]="idMedicoReserva"
+        (change)="idMedicoReserva = $any($event.target).value; cargarHorarios()"
+      >
+        <option value="">Seleccione un médico</option>
 
-    @if (mensaje) {
-      <p class="mensaje">{{ mensaje }}</p>
-    }
+        @for (medico of medicos; track medico.id) {
+          <option [value]="medico.id">
+            {{ medico.nombres }} {{ medico.apellidos }}
+          </option>
+        }
+      </select>
 
-  </div>
+      <label>Fecha</label>
+      <input
+        type="date"
+        [value]="fechaReserva"
+        (change)="fechaReserva = $any($event.target).value; cargarHorarios()"
+      >
+
+      <label>Hora</label>
+      <select
+        [value]="horaReserva"
+        (change)="horaReserva = $any($event.target).value"
+      >
+        <option value="">Seleccione un horario</option>
+
+        @for (horario of horariosDisponibles; track horario) {
+          <option [value]="horario">
+            {{ horario }}
+          </option>
+        }
+      </select>
+
+      <button (click)="guardarReserva()">
+        Guardar reserva
+      </button>
+
+      @if (mensaje) {
+        <p class="mensaje">{{ mensaje }}</p>
+      }
+    </div>
+  }
+
+  <!-- MODIFICAR VALOR DE CONSULTA -->
+  @if (vistaActual === 'valor') {
+    <div class="valor-consulta">
+      <h2>Modificar valor de consulta</h2>
+
+      <label for="medico">Médico</label>
+      <select
+        id="medico"
+        [value]="medicoId"
+        (change)="medicoId = $any($event.target).value"
+      >
+        <option value="">Seleccione un médico</option>
+
+        @for (medico of medicos; track medico.id) {
+          <option [value]="medico.id">
+            {{ medico.nombres }} {{ medico.apellidos }}
+          </option>
+        }
+      </select>
+
+      <label for="valor">Nuevo valor</label>
+      <input
+        type="number"
+        id="valor"
+        placeholder="Ingrese el nuevo valor"
+        [value]="nuevoValor ?? ''"
+        (input)="nuevoValor = +$any($event.target).value"
+      >
+
+      <button (click)="actualizarValor()">
+        Actualizar valor
+      </button>
+
+      @if (mensaje) {
+        <p class="mensaje">{{ mensaje }}</p>
+      }
+    </div>
+  }
 </div>

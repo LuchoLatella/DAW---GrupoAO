@@ -47,4 +47,21 @@ export class Reservas {
     {}
   );
   }
+
+  listarTodas() {
+  return this.http.get<any[]>('/api/reservas');
+}
+
+crearReservaAdmin(
+  idMedico: number,
+  fechaHora: string,
+  idPaciente: number
+) {
+  return this.http.post('/api/reservas', {
+    id_medico: idMedico,
+    fecha_hora: fechaHora,
+    id_paciente: idPaciente
+  });
+}
+
 }
