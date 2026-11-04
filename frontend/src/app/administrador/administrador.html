@@ -21,7 +21,7 @@
   <!-- RESERVAS DEL SISTEMA -->
   @if (vistaActual === 'reservas') {
     <div class="lista-reservas">
-      <h2>Reservas del sistema</h2>
+      <h2>Panel de Admin</h2>
 
       @if (reservas.length > 0) {
         <table>
@@ -48,7 +48,7 @@
                   {{ reserva.fecha_hora | date:'dd/MM/yyyy HH:mm' }}
                 </td>
                 <td>{{ reserva.estado }}</td>
-                <td>{{ reserva.valor_consulta }}</td>
+                <td>{{ reserva.monto_consulta }}</td>
                 <td>
                   @if (reserva.estado === 'ACTIVO') {
                     <button

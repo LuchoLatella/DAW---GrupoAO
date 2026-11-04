@@ -64,3 +64,4 @@ Thumbs.db
 # ==========================================
 coverage/
 .nyc_output/
+/backend/nginx.local.conf
