@@ -3,7 +3,7 @@
   <h1>Panel del Paciente</h1>
   <p>Bienvenido al sistema de turnos de la Clínica Médica.</p>
 
-  <!-- MENÚ -->
+
   <div class="acciones">
     <button (click)="vistaActual = 'reservar'">
       Reservar turno
@@ -14,7 +14,7 @@
     </button>
   </div>
 
-  <!-- RESERVAR TURNO -->
+
   @if (vistaActual === 'reservar') {
     <div class="reservar-turno">
       <h2>Reservar turno</h2>
@@ -80,7 +80,7 @@
   }
 
   
-<!-- MIS RESERVAS -->
+
 @if (vistaActual === 'reservas') {
   <div class="mis-turnos">
     <h2>Mis reservas</h2>

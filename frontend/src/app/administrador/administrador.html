@@ -3,7 +3,7 @@
   <h1>Panel del Administrador</h1>
   <p>Gestión de turnos y médicos de la Clínica Médica.</p>
 
-  <!-- MENÚ DE ADMINISTRACIÓN -->
+  
   <div class="acciones">
     <button (click)="vistaActual = 'reservas'; listarReservas()">
       Ver reservas
@@ -18,7 +18,7 @@
     </button>
   </div>
 
-  <!-- RESERVAS DEL SISTEMA -->
+
   @if (vistaActual === 'reservas') {
     <div class="lista-reservas">
       <h2>Panel de Admin</h2>
@@ -69,7 +69,6 @@
     </div>
   }
 
-  <!-- FORMULARIO PARA RESERVAR -->
   @if (vistaActual === 'reservar') {
     <div class="valor-consulta">
       <h2>Nueva reserva</h2>
@@ -126,7 +125,7 @@
     </div>
   }
 
-  <!-- MODIFICAR VALOR DE CONSULTA -->
+
   @if (vistaActual === 'valor') {
     <div class="valor-consulta">
       <h2>Modificar valor de consulta</h2>
