@@ -15,7 +15,9 @@
     "lint": "eslint \"{src,apps,libs,test}/**/*.html\" --fix",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:cov": "vitest run --coverage"
+    "test:cov": "vitest run --coverage",
+    "compodoc": "npx @compodoc/compodoc -p tsconfig.json -s",
+    "compodoc:build": "npx @compodoc/compodoc -p tsconfig.json -d documentation"
   },
   "dependencies": {
     "@nestjs/common": "^12.0.1",

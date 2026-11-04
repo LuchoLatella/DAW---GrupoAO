@@ -1,12 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { Medico } from '../medicos/medicos.entity';
 import { Usuario } from '../usuarios/usuarios.entity';
+import { Medico } from '../medicos/medicos.entity';
 
 export enum EstadoReserva {
-  ACTIVO = 'ACTIVO',
+  RESERVADO = 'RESERVADO',
   ATENDIDO = 'ATENDIDO',
-  AUSENTE = 'AUSENTE',
   CANCELADO = 'CANCELADO',
+  AUSENTE = 'AUSENTE',
 }
 
 @Entity('reservas')
@@ -14,26 +14,30 @@ export class Reserva {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ name: 'id_medico' })
+  @Column({ type: 'int' })
   id_medico!: number;
 
-  @Column({ name: 'id_paciente' })
+  @Column({ type: 'int' })
   id_paciente!: number;
 
   @Column({ type: 'timestamp' })
   fecha_hora!: Date;
 
-  @Column({ type: 'enum', enum: EstadoReserva })
+  @Column({ type: 'int', name: 'monto_consulta' })
+  monto_consulta!: number;
+
+  @Column({
+    type: 'enum',
+    enum: EstadoReserva,
+    default: EstadoReserva.RESERVADO,
+  })
   estado!: EstadoReserva;
 
-  @Column({ type: 'int' })
-  valor_consulta!: number;
-
-  @ManyToOne(() => Medico)
-  @JoinColumn({ name: 'id_medico' })
-  medico!: Medico;
-
-  @ManyToOne(() => Usuario)
+  @ManyToOne(() => Usuario, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'id_paciente' })
   paciente!: Usuario;
+
+  @ManyToOne(() => Medico, { onDelete: 'RESTRICT' })
+  @JoinColumn({ name: 'id_medico' })
+  medico!: Medico;
 }

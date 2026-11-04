@@ -215,8 +215,8 @@ export class ReservasService {
       id_medico: dto.id_medico,
       id_paciente: idPaciente,
       fecha_hora: fechaHora,
-      estado: EstadoReserva.RESERVADO, // 👈 Alineado con PostgreSQL
-      monto_consulta: medico.valor_consulta, // 👈 Congela tarifa en monto_consulta
+      estado: EstadoReserva.RESERVADO, //  Alineado con PostgreSQL
+      monto_consulta: medico.valor_consulta, //  Congela tarifa en monto_consulta
     });
 
     return await this.reservasRepository.save(reserva);
