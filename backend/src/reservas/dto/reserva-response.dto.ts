@@ -27,7 +27,7 @@ export class ReservaResponseDto {
   @ApiProperty({ example: '2026-11-10T10:00:00.000Z' })
   fecha_hora!: Date;
 
-  @ApiProperty({ enum: EstadoReserva, example: EstadoReserva.RESERVADO })
+  @ApiProperty({ enum: EstadoReserva, example: EstadoReserva.ACTIVO })
   estado!: EstadoReserva;
 
   @ApiProperty({ example: 15000, description: 'Monto congelado de la consulta' })

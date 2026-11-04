@@ -1,9 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+
 import { Usuario } from '../usuarios/usuarios.entity';
 import { Medico } from '../medicos/medicos.entity';
 
 export enum EstadoReserva {
-  RESERVADO = 'RESERVADO',
+  ACTIVO = 'ACTIVO',
   ATENDIDO = 'ATENDIDO',
   CANCELADO = 'CANCELADO',
   AUSENTE = 'AUSENTE',
@@ -23,13 +31,17 @@ export class Reserva {
   @Column({ type: 'timestamp' })
   fecha_hora!: Date;
 
-  @Column({ type: 'int', name: 'monto_consulta' })
+  @Column({
+    name: 'valor_consulta',
+    type: 'int',
+  })
   monto_consulta!: number;
 
   @Column({
     type: 'enum',
     enum: EstadoReserva,
-    default: EstadoReserva.RESERVADO,
+    enumName: 'estados_reservas',
+    default: EstadoReserva.ACTIVO,
   })
   estado!: EstadoReserva;
 

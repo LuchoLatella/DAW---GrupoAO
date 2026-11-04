@@ -53,7 +53,6 @@ export class ReservasController {
       medico: reserva.medico
         ? {
             id: reserva.medico.id,
-            especialidad: reserva.medico.especialidad,
           }
         : null,
     }));

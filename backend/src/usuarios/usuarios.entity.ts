@@ -1,3 +1,4 @@
+
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 export enum RolUsuario {
@@ -8,7 +9,7 @@ export enum RolUsuario {
 
 export enum EstadoUsuario {
   ACTIVO = 'ACTIVO',
-  INACTIVO = 'INACTIVO',
+  BAJA = 'BAJA',
 }
 
 @Entity('usuarios')
@@ -16,29 +17,32 @@ export class Usuario {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'varchar', length: 20, unique: true })
+  @Column({ type: 'text', unique: true })
   documento!: string;
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'text' })
   nombres!: string;
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'text' })
   apellidos!: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'text' })
+  email!: string;
+
+  @Column({ type: 'text' })
   clave!: string;
 
   @Column({
     type: 'enum',
     enum: RolUsuario,
-    enumName: 'rol_usuario_enum',
+    enumName: 'roles_usuarios',
   })
   rol!: RolUsuario;
 
   @Column({
     type: 'enum',
     enum: EstadoUsuario,
-    enumName: 'estado_usuario_enum',
+    enumName: 'estados_usuarios',
     default: EstadoUsuario.ACTIVO,
   })
   estado!: EstadoUsuario;
